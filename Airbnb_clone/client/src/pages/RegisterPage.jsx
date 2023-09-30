@@ -7,20 +7,25 @@ export function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
-    axios.post("/register", {
-      name,
-      email,
-      password,
-    });
+    try {
+      await axios.post("/register", {
+        name,
+        email,
+        password,
+      });
+      alert("Registration successful. You can log in.");
+    } catch (e) {
+      alert("Registration failed. Please try again.");
+    }
   };
 
   return (
     <div className="flex flex-col grow justify-around">
       <div className="mb-64">
         <h2 className="text-2xl text-center mb-2">Register</h2>
-        <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
+        <form className="max-w-md mx-auto" onSubmit={registerUser}>
           <input
             type="text"
             placeholder="John Doe"

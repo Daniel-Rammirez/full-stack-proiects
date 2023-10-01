@@ -42,6 +42,13 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.get("/datos", async (req, res) => {
+  // await UserModel.updateMany({ name: "Coni10" }, { name: "Coni" });
+  // await UserModel.deleteOne({ email: "coni2@gmail.com" });
+  const base = await UserModel.find();
+  res.json({ base });
+});
+
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const userDoc = await UserModel.findOne({ email });

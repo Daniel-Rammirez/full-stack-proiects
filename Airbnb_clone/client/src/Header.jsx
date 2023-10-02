@@ -67,7 +67,7 @@ export function Header() {
             />
           </svg>
           <Link
-            to={"/login"}
+            to={user ? "/account" : "/login"}
             className="border-2 border-gray-500 bg-gray-500 rounded-full text-white overflow-hidden"
           >
             <svg
@@ -83,7 +83,7 @@ export function Header() {
               />
             </svg>
           </Link>
-          {user && <div>{user.name}</div>}
+          <Link to={"/account"}>{user && <div>{user.name}</div>}</Link>
         </div>
       </header>
     </div>

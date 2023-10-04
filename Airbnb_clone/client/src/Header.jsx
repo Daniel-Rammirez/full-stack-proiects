@@ -8,7 +8,7 @@ export function Header() {
     <div>
       <header className="flex justify-between">
         <Link to={"/"} href="" className="flex items-center gap-1">
-          <div className="text-airbnb">
+          <div className="text-airbnb hidden sm:block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -24,16 +24,16 @@ export function Header() {
               />
             </svg>
           </div>
-          <span className="font-black text-airbnb ">airbnd</span>
+          <span className="font-black text-airbnb hidden md:block">airbnd</span>
         </Link>
 
         <div className="border border-gray-300 rounded-full flex shadow py-2 pr-2 pl-5 gap-3 items-center">
           <div>Anywhere</div>
           <div className="border-l border-gray-300 h-8"></div>
-          <div>Any week</div>
-          <div className="border-l border-gray-300 h-8"></div>
+          <div className="truncate">Any week</div>
+          <div className="border-l border-gray-300 h-8 hidden sm:block"></div>
 
-          <div className="font-thin">Add guests</div>
+          <div className="font-thin hidden sm:block">Add guests</div>
           <button className="rounded-full bg-airbnb h-8 w-8 p-2 text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,9 @@ export function Header() {
               />
             </svg>
           </Link>
-          <Link to={"/account"}>{user && <div>{user.name}</div>}</Link>
+          <Link to={"/account"}>
+            {user && <div className="hidden md:block">{user.name}</div>}
+          </Link>
         </div>
       </header>
     </div>

@@ -6,6 +6,7 @@ const UserModel = require("./models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
+const imageDownloader = require("image-downloader");
 const app = express();
 // rammirezdaniel
 // 4ysTIbmrpD5mpcTQ
@@ -16,6 +17,8 @@ const jwtSecret = "randomStringForSecret";
 
 app.use(cookieParser());
 mongoose.connect(process.env.MONGO_URL);
+
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.use(
   cors({
@@ -81,6 +84,17 @@ app.get("/profile", (req, res) => {
 
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("logout");
+});
+
+app.post("/upload-by-link", async (req, res) => {
+  const { link } = req.body;
+  const newName = "photo" + Date.now() + ".jpg";
+  await imageDownloader.image({
+    url: link,
+    // recordar /uploads/
+    dest: __dirname + "/uploads/" + newName,
+  });
+  res.json(newName);
 });
 
 app.listen(4000);

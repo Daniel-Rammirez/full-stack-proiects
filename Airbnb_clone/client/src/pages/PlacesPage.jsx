@@ -27,6 +27,20 @@ export function PlacesPage() {
     setPhotoLink("");
   };
 
+  const uploadPhoto = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      data.append("photos", files[i]);
+    }
+    const { data: filenames } = await axios.post("/upload", data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    setAddedPhotos((prev) => {
+      return [...prev, ...filenames];
+    });
+  };
+
   return (
     <div>
       {action !== "new" && (
@@ -84,7 +98,13 @@ export function PlacesPage() {
               </button>
             </div>
             <div className="mt-2 gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-              <button className="border bg-transparent rounded-2xl p-8 text-2xl text-gray-500 inline-flex gap-2 mr-auto items-center">
+              <label className="border bg-transparent rounded-2xl p-8 text-2xl text-gray-500 inline-flex gap-2 mr-auto items-center cursor-pointer">
+                <input
+                  type="file"
+                  className="hidden"
+                  multiple
+                  onChange={uploadPhoto}
+                />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -100,12 +120,12 @@ export function PlacesPage() {
                   />
                 </svg>
                 Upload
-              </button>
+              </label>
               {addedPhotos.length > 0 &&
                 addedPhotos.map((link, indx) => (
-                  <div key={indx}>
+                  <div className="flex" key={indx}>
                     <img
-                      className="object-cover rounded-2xl h-32 flex"
+                      className="object-cover rounded-2xl h-32 w-full"
                       src={"http://localhost:4000/uploads/" + link}
                       alt={"Image uploaded by user" + link}
                     />

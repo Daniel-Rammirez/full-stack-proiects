@@ -1,8 +1,21 @@
-export function Perks() {
+/* eslint-disable react/prop-types */
+
+export function Perks({ selected, onChange }) {
+  const handleClick = (e) => {
+    const { checked, name } = e.target;
+    if (checked) {
+      onChange([...selected, name]);
+    } else {
+      onChange([...selected.filter((prev) => prev !== name)]);
+    }
+    // console.log("The perk", e.target.name, "is selected? ", e.target.checked);
+    // alert(name);
+  };
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
       <label className="flex border p-2 gap-2 rounded-2xl justify-center items-center cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="wifi" onChange={handleClick} />
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +34,7 @@ export function Perks() {
         <span>WiFi</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="parking" onChange={handleClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -40,7 +53,7 @@ export function Perks() {
         <span>Free parking area</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="pets" onChange={handleClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -59,7 +72,7 @@ export function Perks() {
         <span>Pets</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="privateEntr" onChange={handleClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -78,7 +91,7 @@ export function Perks() {
         <span>Private entrance</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="desk" onChange={handleClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -97,7 +110,7 @@ export function Perks() {
         <span>Desk</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="view" onChange={handleClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

@@ -22,4 +22,4 @@ Testing Github app
 TODO Redirect with subpage and action
 TODO Grid of places
 TODO my booking
-TOD
+TO

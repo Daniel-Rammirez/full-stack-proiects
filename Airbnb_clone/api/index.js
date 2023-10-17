@@ -128,6 +128,7 @@ app.post("/places", (req, res) => {
     checkOut,
     maxGuests,
   } = req.body;
+  // res.json(token);
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
     const placeDoc = await PlaceModel.create({

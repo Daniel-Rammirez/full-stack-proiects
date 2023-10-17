@@ -17,7 +17,8 @@ export function PlacesPage() {
   const [maxGuests, setMaxGuests] = useState(1);
   const [redirect, setRedirect] = useState(false);
 
-  if (redirect && !action) return <Navigate to={"/account/listings"} />;
+  // if we have redirect and in /listings/new (new is the action) navigate to
+  if (redirect && action) return <Navigate to={"/account/listings"} />;
 
   const addNewPlace = async (e) => {
     e.preventDefault();
@@ -32,7 +33,15 @@ export function PlacesPage() {
       checkOut,
       maxGuests,
     };
-    await axios.post("/places", placeData);
+    await axios.post(
+      "/places",
+      {},
+      {
+        withCredentials: true,
+        credentials: "include",
+      },
+      placeData
+    );
     setRedirect(true);
   };
 
@@ -40,6 +49,8 @@ export function PlacesPage() {
     <div>
       {action !== "new" && (
         <div className="text-center">
+          List of all added places
+          <br />
           <Link
             className="inline-flex gap-1 bg-airbnb text-white py-2 px-6 rounded-full mt-10"
             to={"/account/listings/new"}

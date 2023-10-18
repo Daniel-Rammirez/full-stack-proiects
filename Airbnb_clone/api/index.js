@@ -11,8 +11,7 @@ const multer = require("multer");
 const fs = require("fs");
 const imageDownloader = require("image-downloader");
 const app = express();
-// rammirezdaniel
-// 4ysTIbmrpD5mpcTQ
+
 app.use(express.json());
 
 const bcryptSalt = bcrypt.genSaltSync(10);

@@ -54,6 +54,11 @@ app.get("/datos", async (req, res) => {
   res.json({ base });
 });
 
+app.get("/dataPlaces", async (req, res) => {
+  const places = await PlaceModel.find();
+  res.json({ places });
+});
+
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const userDoc = await UserModel.findOne({ email });
@@ -127,7 +132,6 @@ app.post("/places", (req, res) => {
     checkOut,
     maxGuests,
   } = req.body;
-  // res.json(token);
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
     const placeDoc = await PlaceModel.create({
@@ -143,6 +147,15 @@ app.post("/places", (req, res) => {
       maxGuests,
     });
     res.json(placeDoc);
+  });
+});
+
+app.get("/places", (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    const { id } = userData;
+    res.json(await PlaceModel.find({ owner: id }));
   });
 });
 

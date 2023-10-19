@@ -1,0 +1,21 @@
+{
+  "places": [
+    {
+      "_id": "6530b7c0431a776721a56204",
+      "owner": "65178ee672cf84cf98306d2a",
+      "title": "Mi first place",
+      "address": "123 Turtle",
+      "addedPhotos": [
+        "photo1697691541990.jpg",
+        "a083c750251edac3b0e6d9ddca8801c7.jpeg"
+      ],
+      "description": "In this place you can see turtles",
+      "perks": ["pets", "view"],
+      "extraInfo": "Bring food for turtles",
+      "checkIn": 15,
+      "checkOut": 11,
+      "maxGuests": 5,
+      "__v": 0
+    }
+  ]
+}

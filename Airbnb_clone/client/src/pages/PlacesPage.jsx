@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Perks } from "../components/Perks";
 import { PhotoUploader } from "../components/PhotoUploader";
@@ -17,6 +17,17 @@ export function PlacesPage() {
   const [maxGuests, setMaxGuests] = useState(1);
   const [redirect, setRedirect] = useState(false);
 
+  const [places, setPlaces] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/places", {
+        withCredentials: true,
+        credentials: "include",
+      })
+      .then(({ data }) => setPlaces(data));
+  }, []);
+
   // if we have redirect and in /listings/new (new is the action) navigate to
   if (redirect && action) return <Navigate to={"/account/listings"} />;
 
@@ -33,15 +44,10 @@ export function PlacesPage() {
       checkOut,
       maxGuests,
     };
-    await axios.post(
-      "/places",
-      {},
-      {
-        withCredentials: true,
-        credentials: "include",
-      },
-      placeData
-    );
+    await axios.post("/places", placeData, {
+      withCredentials: true,
+      credentials: "include",
+    });
     setRedirect(true);
   };
 
@@ -49,10 +55,8 @@ export function PlacesPage() {
     <div>
       {action !== "new" && (
         <div className="text-center">
-          List of all added places
-          <br />
           <Link
-            className="inline-flex gap-1 bg-airbnb text-white py-2 px-6 rounded-full mt-10"
+            className="inline-flex gap-1 bg-airbnb text-white py-2 px-6 rounded-full mt-6"
             to={"/account/listings/new"}
           >
             <svg
@@ -69,6 +73,38 @@ export function PlacesPage() {
             </svg>
             Add new place
           </Link>
+          <div className="flex flex-col gap-4 mt-6">
+            {places.length > 0 &&
+              places.map((place, indx) => {
+                return (
+                  <Link
+                    to={"/account/listings/" + place._id}
+                    className="flex gap-4 bg-gray-100 rounded-2xl cursor-pointer"
+                    key={indx}
+                  >
+                    <div className="flex bg-gray-300 w-36 h-36 shrink-0 rounded-2xl">
+                      {place.addedPhotos.length > 0 && (
+                        <img
+                          className="object-cover rounded-2xl"
+                          src={
+                            "http://localhost:4000/uploads/" +
+                            place.addedPhotos[0]
+                          }
+                          alt=""
+                        />
+                      )}
+                    </div>
+
+                    <div>
+                      <h2 className="text-xl text-left">{place.title}</h2>
+                      <p className="text-sm mt-2 text-justify pr-4">
+                        {place.description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+          </div>
         </div>
       )}
       {action === "new" && (

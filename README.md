@@ -18,8 +18,5 @@ This repository is designed for developers who want to:
 
 ## Getting Started
 
-Testing Github app
-TODO Redirect with subpage and action
-TODO Grid of places
-TODO my booking
-TOD
+TODO Redirect with subpage and action (refactor)
+TODO Grid of place on the main page

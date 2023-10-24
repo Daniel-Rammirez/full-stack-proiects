@@ -18,5 +18,5 @@ This repository is designed for developers who want to:
 
 ## Getting Started
 
-TODO Redirect with subpage and action (refactor)
+TODO Redirect with subpage and action (refactoring)
 TODO Grid of place on the main page

@@ -43,7 +43,7 @@ export function PlacesPage() {
             places.map((place, indx) => {
               return (
                 <Link
-                  to={"/account/listings/id/" + place._id}
+                  to={"/account/listings/" + place._id}
                   className="flex gap-4 bg-gray-100 rounded-2xl cursor-pointer"
                   key={indx}
                 >

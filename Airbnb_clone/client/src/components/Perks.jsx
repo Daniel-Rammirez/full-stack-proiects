@@ -15,7 +15,12 @@ export function Perks({ selected, onChange }) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
       <label className="flex border p-2 gap-2 rounded-2xl justify-center items-center cursor-pointer">
-        <input type="checkbox" name="wifi" onChange={handleClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("wifi")}
+          name="wifi"
+          onChange={handleClick}
+        />
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +39,12 @@ export function Perks({ selected, onChange }) {
         <span>WiFi</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" name="parking" onChange={handleClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("parking")}
+          name="parking"
+          onChange={handleClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -53,7 +63,12 @@ export function Perks({ selected, onChange }) {
         <span>Free parking area</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" name="pets" onChange={handleClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("pets")}
+          name="pets"
+          onChange={handleClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -72,7 +87,12 @@ export function Perks({ selected, onChange }) {
         <span>Pets</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" name="privateEntr" onChange={handleClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("privateEntr")}
+          name="privateEntr"
+          onChange={handleClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -91,7 +111,12 @@ export function Perks({ selected, onChange }) {
         <span>Private entrance</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" name="desk" onChange={handleClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("desk")}
+          name="desk"
+          onChange={handleClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -110,7 +135,12 @@ export function Perks({ selected, onChange }) {
         <span>Desk</span>
       </label>
       <label className="flex border p-4 gap-2 rounded-2xl  justify-center items-center cursor-pointer">
-        <input type="checkbox" name="view" onChange={handleClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("view")}
+          name="view"
+          onChange={handleClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

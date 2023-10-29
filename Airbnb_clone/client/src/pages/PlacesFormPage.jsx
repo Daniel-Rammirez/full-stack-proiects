@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PhotoUploader } from "../components/PhotoUploader";
 import { Perks } from "../components/Perks";
 import axios from "axios";
 import { AccountNav } from "../components/AccountNav";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export function PlacesFormPage() {
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [addedPhotos, setAddedPhotos] = useState([]);
@@ -16,6 +17,22 @@ export function PlacesFormPage() {
   const [checkOut, setCheckOut] = useState("");
   const [maxGuests, setMaxGuests] = useState(1);
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    if (!id) return;
+    axios.get(`/places/${id}`).then((response) => {
+      const { data } = response;
+      setTitle(data.title);
+      setAddress(data.address);
+      setAddedPhotos(data.addedPhotos);
+      setDescription(data.description);
+      setPerks(data.perks);
+      setExtraInfo(data.extraInfo);
+      setCheckIn(data.checkIn);
+      setCheckOut(data.checkOut);
+      setMaxGuests(data.maxGuests);
+    });
+  }, [id]);
 
   const addNewPlace = async (e) => {
     e.preventDefault();
@@ -30,11 +47,23 @@ export function PlacesFormPage() {
       checkOut,
       maxGuests,
     };
-    await axios.post("/places", placeData, {
-      withCredentials: true,
-      credentials: "include",
-    });
-    setRedirect(true);
+    if (id) {
+      await axios.put(
+        "/places",
+        { id, ...placeData },
+        {
+          withCredentials: true,
+          credentials: "include",
+        }
+      );
+      setRedirect(true);
+    } else {
+      await axios.post("/places", placeData, {
+        withCredentials: true,
+        credentials: "include",
+      });
+      setRedirect(true);
+    }
   };
 
   if (redirect) return <Navigate to={"/account/listings"} />;
@@ -109,7 +138,10 @@ export function PlacesFormPage() {
           </div>
         </div>
         <div>
-          <button className="bg-airbnb w-full rounded-full text-white p-1 my-5 h-10">
+          <button
+            type="submit"
+            className="bg-airbnb w-full rounded-full text-white p-1 my-5 h-10"
+          >
             Save
           </button>
         </div>

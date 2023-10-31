@@ -34,12 +34,13 @@ export function PhotoUploader({ addedPhotos, onChange }) {
     });
   };
 
-  const selectAsMainPhoto = (e, filename) => {
+  const selectAsMainPhoto = (e, filename, indx) => {
     e.preventDefault();
-    const addedPhotosFiltered = [
-      ...addedPhotos.filter((photo) => photo !== filename),
-    ];
-    onChange([filename, ...addedPhotosFiltered]);
+    // onChange([filename, ...addedPhotos.filter((photo) => photo !== filename)]);
+    const copyAddedPhotos = [...addedPhotos];
+    copyAddedPhotos[indx] = copyAddedPhotos[0];
+    copyAddedPhotos[0] = filename;
+    onChange(copyAddedPhotos);
   };
 
   return (
@@ -92,7 +93,7 @@ export function PhotoUploader({ addedPhotos, onChange }) {
                 alt={"Image uploaded by user" + filename}
               />
               <button
-                onClick={(e) => selectAsMainPhoto(e, filename)}
+                onClick={(e) => selectAsMainPhoto(e, filename, indx)}
                 className="absolute bottom-1 left-1 text-white bg-black bg-opacity-50 rounded-2xl py-1 px-2"
               >
                 {filename === addedPhotos[0] ? (

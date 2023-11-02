@@ -16,6 +16,7 @@ export function PlacesFormPage() {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [maxGuests, setMaxGuests] = useState(1);
+  const [price, setPrice] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export function PlacesFormPage() {
       setCheckIn(data.checkIn);
       setCheckOut(data.checkOut);
       setMaxGuests(data.maxGuests);
+      setPrice(data.price);
     });
   }, [id]);
 
@@ -46,6 +48,7 @@ export function PlacesFormPage() {
       checkIn,
       checkOut,
       maxGuests,
+      price,
     };
     if (id) {
       await axios.put(
@@ -105,7 +108,7 @@ export function PlacesFormPage() {
           placeholder="My lovely place"
         />
         <label>Check in and check out times:</label>
-        <div className="grid grid-cols-3 text-center gap-2">
+        <div className="grid grid-cols-4 text-center gap-2">
           <div>
             <label>Check In</label>
             <input
@@ -134,6 +137,16 @@ export function PlacesFormPage() {
               type="text"
               className=""
               placeholder="2"
+            />
+          </div>
+          <div>
+            <label>Price per night</label>
+            <input
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              type="text"
+              className=""
+              placeholder="2000 AUD"
             />
           </div>
         </div>

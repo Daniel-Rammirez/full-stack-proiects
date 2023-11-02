@@ -33,7 +33,7 @@ export function Header() {
           <div className="truncate">Any week</div>
           <div className="border-l border-gray-300 h-8 hidden sm:block"></div>
 
-          <div className="font-thin hidden sm:block">Add guests</div>
+          <div className="font-thin hidden sm:block truncate">Add guests</div>
           <button className="rounded-full bg-airbnb h-8 w-8 p-2 text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"

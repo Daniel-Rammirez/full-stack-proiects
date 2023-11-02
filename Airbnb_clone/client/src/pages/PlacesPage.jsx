@@ -9,7 +9,7 @@ export function PlacesPage() {
 
   useEffect(() => {
     axios
-      .get("/places", {
+      .get("/user-places", {
         withCredentials: true,
         credentials: "include",
       })

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function IndexPage() {
   const [places, setPlaces] = useState([]);
@@ -30,7 +31,7 @@ export function IndexPage() {
     <div className="flex gap-8 flex-wrap items-center justify-center">
       {places.length > 0 &&
         places.map((place) => (
-          <div key={place._id}>
+          <Link to={"/place/" + place._id} key={place._id}>
             <div className="bg-gray-300 rounded-2xl w-72 h-72 relative">
               <img
                 className="rounded-2xl h-72 w-auto grow object-cover"
@@ -61,7 +62,7 @@ export function IndexPage() {
               <span>${formatNumber(place.price)} AUD</span>
               <span className="font-light"> total</span>
             </div>
-          </div>
+          </Link>
         ))}
     </div>
   );

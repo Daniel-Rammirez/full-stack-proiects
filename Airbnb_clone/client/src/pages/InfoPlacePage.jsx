@@ -122,9 +122,6 @@ export function InfoPlacePage() {
           <div className="text-justify p-2">{data.description}</div>
           <div className="text-justify p-2">{data.description}</div>
           <div className="text-justify p-2">{data.description}</div>
-          <div className="text-justify p-2">{data.description}</div>
-          <div className="text-justify p-2">{data.description}</div>
-          <div className="text-justify p-2">{data.description}</div>
         </div>
       )}
     </div>
